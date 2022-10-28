@@ -13,6 +13,7 @@
   "dependencies": {
     "@fastify/nextjs": "^9.1.1",
     "@tailwindcss/typography": "^0.5.4",
+    "clsx": "^1.2.1",
     "esbuild": "^0.15.1",
     "fastify": "^4.9.2",
     "gray-matter": "^4.0.3",

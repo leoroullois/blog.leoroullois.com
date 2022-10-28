@@ -12,3 +12,5 @@ export type Post = {
   frontmatter: PostMeta;
   id: string;
 };
+
+export type BlogPostCategory = "articles" | "writeups";

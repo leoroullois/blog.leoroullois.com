@@ -1,4 +1,5 @@
 import {NextPage} from 'next';
+import Head from 'next/head';
 import {FC} from 'react';
 import {MDXComponent} from '../../src/components/MDXComponent';
 import NavBar from '../../src/components/navbar';
@@ -52,6 +53,9 @@ export const PostPage: NextPage<{post: Post}> = ({post}) => {
 
   return (
     <>
+      <Head>
+        <title>{`${post.frontmatter.title} - Léo Roullois`}</title>
+      </Head>
       <NavBar post={post} />
       <main className='flex flex-col gap-y-6 max-w-2xl mx-auto w-full px-8 pt-8'>
         <header className='flex flex-col gap-y-4'>
@@ -75,16 +79,17 @@ export const PostPage: NextPage<{post: Post}> = ({post}) => {
 export default PostPage;
 
 export const getStaticPaths = async () => {
-  const slugs = getPostsSlugs();
+  const articlesSlugs = getPostsSlugs('articles');
+  const writeupsSlugs = getPostsSlugs('writeups');
 
   return {
-    paths: slugs,
+    paths: [...writeupsSlugs,...articlesSlugs],
     fallback: false,
   };
 };
 
 export const getStaticProps = async ({params}: PostSlugParams) => {
-  const post = await getPostBySlug(params.slug);
+  const post = await getPostBySlug(params.post, params.slug);
   return {
     props: {post},
   };
