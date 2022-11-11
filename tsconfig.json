@@ -21,6 +21,10 @@
       "@src/*": ["src/*"],
       "@_posts/*": ["content/*"],
       "@lib/*": ["src/lib/*"],
+      "@mdx/*": ["src/components/mdx/*"],
+      "@layout/*": ["src/components/layout/*"],
+      "@common/*": ["src/components/_common/*"],
+      "@hooks/*": ["src/hooks/*"],
       "@type/*": ["src/type/*"],
       "@styles/*": ["src/styles/*"],
       "@public/*": ["public/*"]

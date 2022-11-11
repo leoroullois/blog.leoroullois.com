@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 
-export const MDXCounter = () => {
+const Counter: FC = () => {
   const [count, setCount] = useState(0);
   return (
     <div>
@@ -15,3 +15,5 @@ export const MDXCounter = () => {
     </div>
   );
 };
+
+export default Counter;

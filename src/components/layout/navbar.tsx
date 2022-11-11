@@ -3,6 +3,9 @@ import {useRouter} from 'next/router';
 import Link from 'next/link';
 
 import {Post} from '@type/post';
+import {links} from "@lib/constants"
+
+import NavLink from '@components/_common/nav-link';
 
 interface IProps {
   post?: Post;
@@ -31,16 +34,9 @@ const NavBar: FC<IProps> = ({post}) => {
         <div className='h-4 w-2 bg-pink-500 animate-pulse' />
       </div>
       <div className='flex flex-row gap-x-5'>
-        <Link href={`/articles`}>
-          <a className='flex items-center px-4 h-10 bg-gray-50/10 hover:bg-gray-50/20 duration-100 rounded'>
-            {'{ Articles }'}
-          </a>
-        </Link>
-        <Link href={`/writeups`}>
-          <a className='flex items-center px-4 h-10 bg-gray-50/10 hover:bg-gray-50/20 duration-100 rounded'>
-            {'[ Writeups ]'}
-          </a>
-        </Link>
+        {links.map(({href, label}, i) => (
+          <NavLink href={href} key={i}>{label}</NavLink>
+        ))}
       </div>
     </nav>
   );

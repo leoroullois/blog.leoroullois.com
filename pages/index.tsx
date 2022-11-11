@@ -1,9 +1,8 @@
 import type {GetStaticProps, NextPage} from 'next';
 import Head from 'next/head';
 
-import NavBar from '@components/navbar';
-import Wrapper from '@components/wrapper';
-import BlogSection from '@components/blog-section';
+import NavBar from '@layout/navbar';
+import Wrapper from '@common/wrapper';
 
 import {getSortedPostsData, sortPosts} from '@lib/post';
 import {PostMeta} from '@type/post';

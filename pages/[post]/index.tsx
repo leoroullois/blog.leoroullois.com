@@ -1,21 +1,14 @@
+import {useEffect, useState} from 'react';
 import {GetStaticPaths, GetStaticProps, NextPage} from 'next';
 import Head from 'next/head';
-
-import {MDXComponent} from '@components/MDXComponent';
-import NavBar from '@components/navbar';
-import Tag from '@components/_common/tags';
-
-import {
-  getPostBySlug,
-  getPostsSlugs,
-  getSortedPostsData,
-  PostSlugParams,
-} from '@lib/post';
-
-import {BlogPostCategory, Post, PostMeta} from '@type/post';
 import {useRouter} from 'next/router';
+
+import NavBar from '@layout/navbar';
 import BlogSection from '@components/blog-section';
-import {useEffect, useState} from 'react';
+
+import {getSortedPostsData} from '@lib/post';
+
+import {BlogPostCategory, PostMeta} from '@type/post';
 
 interface IProps {
   posts: PostMeta[];
@@ -29,11 +22,13 @@ export const PostPage: NextPage<IProps> = ({posts}) => {
     return [first.toUpperCase(), ...rest].join('');
   };
 
-  const [name, setName] = useState(capitalizeFirstLetter(router.query?.post as string));
+  const [name, setName] = useState(
+    capitalizeFirstLetter(router.query?.post as string)
+  );
 
   useEffect(() => {
-      setName(capitalizeFirstLetter(router.query?.post as string));
-  }, [router.query.post])
+    setName(capitalizeFirstLetter(router.query?.post as string));
+  }, [router.query.post]);
 
   return (
     <>
@@ -42,15 +37,18 @@ export const PostPage: NextPage<IProps> = ({posts}) => {
       </Head>
       <NavBar />
       <main className='flex flex-col gap-y-6 max-w-2xl mx-auto w-full px-8 pt-8'>
-        <BlogSection posts={posts} category={name.toLowerCase() as BlogPostCategory}>
-          {`${name.toLowerCase() === "articles" ? "{ Articles }" : "[ Writeups ]"}`}
+        <BlogSection
+          posts={posts}
+          category={name.toLowerCase() as BlogPostCategory}
+        >
+          {`${
+            name.toLowerCase() === 'articles' ? '{ Articles }' : '[ Writeups ]'
+          }`}
         </BlogSection>
       </main>
     </>
   );
 };
-
-export default PostPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -62,9 +60,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({params}) => {
   const post = params?.post as BlogPostCategory;
   const posts = getSortedPostsData(post);
+
   return {
     props: {
       posts,
     },
   };
 };
+
+export default PostPage;

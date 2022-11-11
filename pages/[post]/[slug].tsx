@@ -1,16 +1,16 @@
 import {GetStaticProps, NextPage} from 'next';
 import Head from 'next/head';
 
-import {MDXComponent} from '@components/MDXComponent';
-import NavBar from '@components/navbar';
-import Tag from '@components/_common/tags';
+import NavBar from '@layout/navbar';
+import {MDXComponent} from '@components/mdx-component';
+import Tag from '@common/tags';
 
-import {getPostBySlug, getPostsSlugs, PostSlugParams} from '@lib/post';
+import {getPostBySlug, getPostsSlugs } from '@lib/post';
 
 import {BlogPostCategory, Post} from '@type/post';
 
-import {useDate} from '@src/hooks/use-date';
-import {useTags} from '@src/hooks/use-tags';
+import {useDate} from '@hooks/use-date';
+import {useTags} from '@hooks/use-tags';
 
 export const PostPage: NextPage<{post: Post}> = ({post}) => {
   const {author, title} = post.frontmatter;
@@ -46,8 +46,6 @@ export const PostPage: NextPage<{post: Post}> = ({post}) => {
   );
 };
 
-export default PostPage;
-
 export const getStaticPaths = async () => {
   const articlesSlugs = getPostsSlugs('articles');
   const writeupsSlugs = getPostsSlugs('writeups');
@@ -72,3 +70,5 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     props: {post},
   };
 };
+
+export default PostPage;

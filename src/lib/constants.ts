@@ -12,3 +12,8 @@ export const months = [
   'November',
   'December',
 ];
+
+export const links = [
+  {href: '/articles', label: '{ Articles }'},
+  {href: '/writeups', label: ' [ Writeups]'},
+];

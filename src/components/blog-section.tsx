@@ -1,8 +1,9 @@
-import {BlogPostCategory, PostMeta} from '@src/type/post';
-import clsx from 'clsx';
-import Link from 'next/link';
 import {FC, PropsWithChildren} from 'react';
-import PostLink from './post-link';
+
+import clsx from 'clsx';
+import {BlogPostCategory, PostMeta} from '@src/type/post';
+
+import PostLink from '@components/post-link';
 
 interface IProps {
   posts: PostMeta[];
