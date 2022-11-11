@@ -1,6 +1,8 @@
 import {getMDXComponent, MDXContentProps} from 'mdx-bundler/client';
 import {FC, useMemo} from 'react';
-import Counter from '@mdx/counter';
+import Warning from "@mdx/warning";
+import Info from "@mdx/info";
+import Tip from "@mdx/tip";
 
 interface IMDXComponentBase {
   Component: React.FunctionComponent<MDXContentProps>;
@@ -9,7 +11,9 @@ interface IMDXComponentBase {
 const MDXComponentBase: FC<IMDXComponentBase> = ({Component}) => (
   <Component
     components={{
-      Counter,
+      Warning,
+      Info,
+      Tip
     }}
   />
 );
