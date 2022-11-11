@@ -508,6 +508,23 @@ VIM :
 - ```2s``` supprimer 2 caractère + insertion
 - ```dit``` dupprimer l'intérieur des tags (par exemple h1 h2 ou p)
 
+```html
+<html>
+  Loem ipsum dolor sit amet
+
+
+
+</html>
+```
+
+```javascript
+function(param1, param2) {
+
+    ihgr
+    lrghrlkh
+  }
+```
+
 ## OpenLDAP
 
 ### Annuaire OpenLDAP

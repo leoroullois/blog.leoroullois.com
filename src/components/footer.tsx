@@ -4,8 +4,8 @@ export const Footer = () => {
     return date.getFullYear();
   };
   return (
-    <footer className='py-4 text-center font-semibold'>
-        <p className='max-w-lg mx-auto text-gray-900'>
+    <footer className='flex flex-col gap-y-3 bg-gray-50/5 py-4 text-center font-semibold'>
+        <p className='max-w-lg mx-auto'>
           Thank you for reading.
         </p>
         <p className=''>© {getYear()} Léo Roullois</p>

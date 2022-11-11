@@ -71,3 +71,21 @@ export const getPostBySlug = async (category: BlogPostCategory, slug: string): P
     frontmatter: frontmatter as PostMeta,
   };
 };
+
+
+export const sortPosts = (arr: PostMeta[]) => {
+  const sortedPosts = arr.sort((a, b) => {
+    let tempDate = a.date.split('/');
+    let dateObj = new Date(`${tempDate[1]}/${tempDate[0]}/${tempDate[2]}`);
+    const dateA = new Date(dateObj);
+
+    tempDate = b.date.split('/');
+    dateObj = new Date(`${tempDate[1]}/${tempDate[0]}/${tempDate[2]}`);
+    const dateB = new Date(dateObj);
+
+    return dateA < dateB ? 1 : -1;
+  });
+
+  return sortedPosts;
+};
+

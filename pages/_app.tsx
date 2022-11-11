@@ -1,7 +1,7 @@
 import type {AppProps} from 'next/app';
-import {Layout} from '../src/components/layout';
-import '../styles/globals.css';
-import '../styles/prism-code-highlight.css';
+import {Layout} from '@components/layout';
+import '@styles/globals.css';
+import '@styles/prism-code-highlight.css';
 
 function MyApp({Component, pageProps}: AppProps) {
   return (
