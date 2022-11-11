@@ -7,6 +7,7 @@ import Wrapper from '@common/wrapper';
 import {getSortedPostsData, sortPosts} from '@lib/post';
 import {PostMeta} from '@type/post';
 import PostLink from '@components/post-link';
+import SEO from '@components/seo';
 
 type SortedPostMeta = PostMeta & {category: 'articles' | 'writeups'};
 
@@ -15,15 +16,24 @@ interface IHomeProps {
 }
 
 const Home: NextPage<IHomeProps> = ({sortedPosts}) => {
+  const title = 'Blog - Léo Roullois';
   return (
     <>
       <Head>
-        <title>Blog - Léo Roullois</title>
+        <SEO
+          title={title}
+          description='Lorem ipsum dolor sit amet.'
+          ogType='website'
+          url='https://blog.leoroullois.com'
+          image={`https://blog.leoroullois.com/banner.jpg`}
+          twitterUsername='@ley0x'
+        />
+        <title>{title}</title>
       </Head>
       <NavBar />
       <main className='w-full'>
         <Wrapper className='flex-col'>
-          <h1 className='text-4xl font-bold'>Last published</h1>
+          <h1 className='text-4xl font-bold'>{'</ Last published >'}</h1>
           {sortedPosts.map(({id, title, description, date, category}) => (
             <PostLink
               key={id}

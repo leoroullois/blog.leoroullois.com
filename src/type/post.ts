@@ -5,8 +5,9 @@ export type PostMeta = {
   title: string;
   description: string;
   author: string;
-  date: string;
-  tags: string;
+  date: number;
+  tags: string[];
+  image: string;
 };
 
 export type PostSlugParams = {

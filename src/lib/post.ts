@@ -17,15 +17,8 @@ const postsDirectory: string = path.join(process.cwd(), 'content');
 
 export const sortPosts : SortPosts = (arr) => {
   const sortedPosts = arr.sort((a, b) => {
-    let tempDate = a.date.split('/');
-    let dateObj = new Date(`${tempDate[1]}/${tempDate[0]}/${tempDate[2]}`);
-    const dateA = new Date(dateObj);
 
-    tempDate = b.date.split('/');
-    dateObj = new Date(`${tempDate[1]}/${tempDate[0]}/${tempDate[2]}`);
-    const dateB = new Date(dateObj);
-
-    return dateA < dateB ? 1 : -1;
+    return a.date < b.date ? 1 : -1;
   });
 
   return sortedPosts;
@@ -60,6 +53,17 @@ export const getPostsSlugs: GetPostsSlugs = (category) =>
     },
   }));
 
+const formatFrontmatter = (frontmatter: any): PostMeta => {
+
+  const date = frontmatter.date.split('/');
+  const dateObj = Date.parse(`${date[1]}/${date[0]}/${date[2]}`);
+  frontmatter.date = dateObj;
+
+  frontmatter.tags = frontmatter.tags.split(" ");
+
+  return frontmatter as PostMeta;
+}
+
 export const getPostBySlug: GetPostBySlug = async (category, slug) => {
   const fullPath = path.join(postsDirectory, category, `${slug}.mdx`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
@@ -78,9 +82,11 @@ export const getPostBySlug: GetPostBySlug = async (category, slug) => {
     },
   });
 
+  const data = formatFrontmatter(frontmatter);
+
   return {
     id: slug,
     code,
-    frontmatter: frontmatter as PostMeta,
+    frontmatter: data,
   };
 };
