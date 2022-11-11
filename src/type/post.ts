@@ -1,3 +1,5 @@
+// INFO: types articles/posts
+
 export type PostMeta = {
   id: string;
   title: string;
@@ -7,6 +9,14 @@ export type PostMeta = {
   tags: string;
 };
 
+export type PostSlugParams = {
+  params: {
+    slug: string;
+    post: BlogPostCategory;
+  };
+};
+
+
 export type Post = {
   code: string;
   frontmatter: PostMeta;
@@ -14,3 +24,16 @@ export type Post = {
 };
 
 export type BlogPostCategory = "articles" | "writeups";
+
+// INFO: Functions
+
+export type SortPosts = (arr: PostMeta[]) => PostMeta[];
+
+export type GetSortedPostsData = (category: BlogPostCategory) => PostMeta[];
+
+export type GetPostBySlug = (
+  category: BlogPostCategory,
+  slug: string
+) => Promise<Post>;
+
+export type GetPostsSlugs = (category: BlogPostCategory) => PostSlugParams[];

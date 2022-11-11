@@ -5,15 +5,35 @@ import path from 'path';
 import rehypePrism from 'rehype-prism-plus';
 import remarkGfm from 'remark-gfm';
 import remarkToc from 'remark-toc';
-import {Post, PostMeta, BlogPostCategory} from '../type/post';
+import {
+  PostMeta,
+  GetPostBySlug,
+  GetPostsSlugs,
+  SortPosts,
+  GetSortedPostsData,
+} from '@type/post';
 
 const postsDirectory: string = path.join(process.cwd(), 'content');
 
-export const getSortedPostsData = (category: BlogPostCategory) => {
+export const sortPosts : SortPosts = (arr) => {
+  const sortedPosts = arr.sort((a, b) => {
+    let tempDate = a.date.split('/');
+    let dateObj = new Date(`${tempDate[1]}/${tempDate[0]}/${tempDate[2]}`);
+    const dateA = new Date(dateObj);
+
+    tempDate = b.date.split('/');
+    dateObj = new Date(`${tempDate[1]}/${tempDate[0]}/${tempDate[2]}`);
+    const dateB = new Date(dateObj);
+
+    return dateA < dateB ? 1 : -1;
+  });
+
+  return sortedPosts;
+};
+
+export const getSortedPostsData: GetSortedPostsData = (category) => {
   const directory = path.join(postsDirectory, category as string);
-  const fileNames = fs
-    .readdirSync(directory)
-    .filter((f) => f.includes('.mdx'));
+  const fileNames = fs.readdirSync(directory).filter((f) => f.includes('.mdx'));
 
   const allPostsData: PostMeta[] = fileNames.map((fileName) => {
     const id = fileName.replace(/\.mdx$/, '');
@@ -29,17 +49,10 @@ export const getSortedPostsData = (category: BlogPostCategory) => {
     };
   });
 
-  return allPostsData;
+  return sortPosts(allPostsData);
 };
 
-export type PostSlugParams = {
-  params: {
-    slug: string;
-    post: BlogPostCategory;
-  };
-};
-
-export const getPostsSlugs = (category: BlogPostCategory): PostSlugParams[] =>
+export const getPostsSlugs: GetPostsSlugs = (category) =>
   getSortedPostsData(category).map((p) => ({
     params: {
       slug: p.id,
@@ -47,7 +60,7 @@ export const getPostsSlugs = (category: BlogPostCategory): PostSlugParams[] =>
     },
   }));
 
-export const getPostBySlug = async (category: BlogPostCategory, slug: string): Promise<Post> => {
+export const getPostBySlug: GetPostBySlug = async (category, slug) => {
   const fullPath = path.join(postsDirectory, category, `${slug}.mdx`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
@@ -71,21 +84,3 @@ export const getPostBySlug = async (category: BlogPostCategory, slug: string): P
     frontmatter: frontmatter as PostMeta,
   };
 };
-
-
-export const sortPosts = (arr: PostMeta[]) => {
-  const sortedPosts = arr.sort((a, b) => {
-    let tempDate = a.date.split('/');
-    let dateObj = new Date(`${tempDate[1]}/${tempDate[0]}/${tempDate[2]}`);
-    const dateA = new Date(dateObj);
-
-    tempDate = b.date.split('/');
-    dateObj = new Date(`${tempDate[1]}/${tempDate[0]}/${tempDate[2]}`);
-    const dateB = new Date(dateObj);
-
-    return dateA < dateB ? 1 : -1;
-  });
-
-  return sortedPosts;
-};
-
