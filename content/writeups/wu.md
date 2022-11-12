@@ -1,9 +1,9 @@
 ---
-title: 'MDX Blog created with Next.js'
+title: 'WU test'
 description: 'My first post, Hello from my new blog, created with MDX and Next js !!'
-image: /posts/got.jpg
-tags: linux bash
-date: 21/11/2022
+image: /banner.jpg
+tags: javascript
+date: 12/10/2022
 author: '@ley0x_'
 ---
 

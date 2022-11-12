@@ -14,7 +14,7 @@ interface IProps {
 const NavBar: FC<IProps> = ({post}) => {
   const router = useRouter();
   return (
-    <nav className='flex justify-between items-center bg-gray-50/5 w-full h-16 px-8 font-bold gap-x-5'>
+    <nav className='flex flex-wrap justify-between items-center bg-gray-50/5 w-full py-3 px-8 font-bold gap-5'>
       <div className='flex items-center gap-x-3 text-white/80'>
         <span className='text-white'>{'leyo@blog $'}</span>
         <Link href='/'>
@@ -22,10 +22,10 @@ const NavBar: FC<IProps> = ({post}) => {
         </Link>
         {!!post && (
           <>
-            <span>/</span>
+            <span className='hidden lg:block'>/</span>
             <button
               onClick={router.reload}
-              className='hover:border-b hover:border-b-pink-500'
+              className='hidden lg:block hover:border-b hover:border-b-pink-500'
             >
               {post.frontmatter.title}
             </button>

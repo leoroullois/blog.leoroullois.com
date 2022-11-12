@@ -1,13 +1,13 @@
 import { FC, PropsWithChildren } from "react";
 import { getAnchor } from "@lib/utils";
 
-const H2: FC<PropsWithChildren> = ({ children }) => {
+const H5: FC<PropsWithChildren> = ({ children }) => {
   const anchor = getAnchor(children as string);
   return (
-    <h2 id={anchor}>
+    <h5 id={anchor}>
       {children}
-    </h2>
+    </h5>
   );
 };
 
-export default H2;
+export default H5;
