@@ -2,3 +2,4 @@
 
 - LVM & RAID
 - Blockchain
+- Base64 algorithm

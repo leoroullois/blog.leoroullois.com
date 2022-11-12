@@ -26,10 +26,10 @@ export const sortPosts : SortPosts = (arr) => {
 
 export const getSortedPostsData: GetSortedPostsData = (category) => {
   const directory = path.join(postsDirectory, category as string);
-  const fileNames = fs.readdirSync(directory).filter((f) => f.includes('.mdx'));
+  const fileNames = fs.readdirSync(directory).filter((f) => f.includes('.md'));
 
   const allPostsData: PostMeta[] = fileNames.map((fileName) => {
-    const id = fileName.replace(/\.mdx$/, '');
+    const id = fileName.replace(/\.md$/, '');
 
     const fullPath = path.join(postsDirectory, category, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
@@ -65,7 +65,7 @@ const formatFrontmatter = (frontmatter: any): PostMeta => {
 }
 
 export const getPostBySlug: GetPostBySlug = async (category, slug) => {
-  const fullPath = path.join(postsDirectory, category, `${slug}.mdx`);
+  const fullPath = path.join(postsDirectory, category, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const {code, frontmatter} = await bundleMDX({

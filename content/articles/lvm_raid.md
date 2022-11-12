@@ -9,8 +9,21 @@ tags: linux
 - [1. LVM (Logical Volume Manager)](#1-lvm-logical-volume-manager)
   - [1.1. Introduction](#11-introduction)
   - [1.2. Definitions](#12-definitions)
+  - [1.3. 1.3 Physical Volumes (PV)](#13-13-physical-volumes-pv)
+  - [1.4. Volume Groups (VG)](#14-volume-groups-vg)
+    - [1.4.1. Creating and listing VGs](#141-creating-and-listing-vgs)
+    - [1.4.2. Extending and reducing a VG](#142-extending-and-reducing-a-vg)
+    - [1.4.3. Delete a VG](#143-delete-a-vg)
+  - [1.5. Logical Volumes (LV)](#15-logical-volumes-lv)
+    - [1.5.1. Creating a LV](#151-creating-a-lv)
+    - [1.5.2. Operations on LV](#152-operations-on-lv)
+    - [1.5.3. Resize (extend or reduce) a LV](#153-resize-extend-or-reduce-a-lv)
+  - [1.6. Snapshot and restoration](#16-snapshot-and-restoration)
 - [2. RAID](#2-raid)
-  - [2.1. Introduction](#21-introduction)
+  - [2.1. What is a RAID ?](#21-what-is-a-raid-)
+  - [2.2. Deep dive into RAID 1](#22-deep-dive-into-raid-1)
+    - [2.2.1. Creation](#221-creation)
+    - [2.2.2. Recovering](#222-recovering)
 
 ## 1. LVM (Logical Volume Manager)
 
@@ -50,7 +63,7 @@ That's why we need to use LVM with RAID.
   sde      8:64   0    5G  0 disk
 ```
 
-### 1.3 Physical Volumes (PV)
+### 1.3. 1.3 Physical Volumes (PV)
 
 3 disks of 5Gio(sdc, sdd, sde), 2 partitions on sdd (sdd1, sdd2) created from :
 
@@ -146,9 +159,9 @@ Now, I can recreate the PV with the following command :
   sudo pvcreate /dev/sdd2
 ```
 
-### Volume Groups (VG)
+### 1.4. Volume Groups (VG)
 
-#### Creating and listing VGs
+#### 1.4.1. Creating and listing VGs
 
 I can create a volume group that includes the PV ``/dev/sdc`` and ``/dev/sdd1`` with this command :
 ```
@@ -201,7 +214,7 @@ Output :
   PV UUID               XiZDy3-JXz6-clD1-Sh6Q-KaB5-6ns3-NnmRqe
 ```
 
-#### Extending and reducing a VG
+#### 1.4.2. Extending and reducing a VG
 
 Extending a volume group is the action of adding a new physical volume to our VG.
 With our previous manipulations we have one volume group named **lvm_tutorial** created from ``/dev/sdc`` and ``/dev/sdd1``.
@@ -289,7 +302,7 @@ I will add these to volumes back for the rest of this article.
 sudo vgextend lvm_tutorial /dev/sdc /dev/sdd1
 ```
 
-#### Delete a VG
+#### 1.4.3. Delete a VG
 
 You can delete a VG like this :
 ```bash
@@ -299,12 +312,12 @@ sudo vgremove <vg_name>
 **Don't run the following command if you want to read the rest of the article.**
 > For example : ``sudo vgremove lvm_tutorial``.
 
-### Logical Volumes (LV)
+### 1.5. Logical Volumes (LV)
 
 Volumes groups are like your hard disks, and your logical volumes are like the partitions on these disks.
 Indeed, you can format a LV with a file system of your choice and mount it wherever you want.
 
-#### Creating a LV
+#### 1.5.1. Creating a LV
 
 You can create a new logical volume like this :
 
@@ -325,7 +338,7 @@ vagrant@lvm:~$ sudo lvcreate -L 5GB -n lv1 lvm_tutorial
 ```
 
 
-#### Operations on LV
+#### 1.5.2. Operations on LV
 
 You can access your LV here : ``/dev/<vg_name>/<lv_name>``.
 
@@ -361,7 +374,7 @@ Now, you can mount it :
 sudo mount -t ext4 /dev/lvm_tutorial/lv1 /mnt
 ```
 
-#### Resize (extend or reduce) a LV
+#### 1.5.3. Resize (extend or reduce) a LV
 
 You can resize a logical volume with the command ``lvresize``, ``lvextend`` or ``lvreduce``. Here is an example :
 
@@ -389,7 +402,7 @@ then :
 sudo resize2fs /dev/lvm_tutorial/lv1
 ```
 
-### Snapshot and restoration
+### 1.6. Snapshot and restoration
 
 ```bash
 sudo lvcreate -s -n <snap_name> -L <size> <lv_name>
@@ -477,11 +490,11 @@ You just restored your **LV** thanks to a snapshot.
 
 ## 2. RAID
 
-### What is a RAID ?
+### 2.1. What is a RAID ?
 
-### Deep dive into RAID 1
+### 2.2. Deep dive into RAID 1
 
-#### Creation 
+#### 2.2.1. Creation 
 
 First, to create our RAID1, we need two hard disks, with which we will create two PV and one VG.
 Then, we will create two LV on this VG on which we will create our RAID1 :
@@ -611,7 +624,7 @@ If you want your disk to be mounted at startup, you can edit the file at ``/etc/
 
 You can now create your store data within the mounted point.
 
-#### Recovering
+#### 2.2.2. Recovering
 
 RAID 1 is for high availability.
 

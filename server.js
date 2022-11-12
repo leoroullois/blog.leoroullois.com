@@ -8,7 +8,7 @@ fastify
     fastify.next('/*');
   });
 
-const port = 50_002;
+const port = 50002;
 
 const start = async () => {
   try {

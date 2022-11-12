@@ -3,6 +3,7 @@ import {FC, useMemo} from 'react';
 import Warning from "@mdx/warning";
 import Info from "@mdx/info";
 import Tip from "@mdx/tip";
+import H2 from "@mdx/H2";
 
 interface IMDXComponentBase {
   Component: React.FunctionComponent<MDXContentProps>;
@@ -13,7 +14,8 @@ const MDXComponentBase: FC<IMDXComponentBase> = ({Component}) => (
     components={{
       Warning,
       Info,
-      Tip
+      Tip,
+      h2: H2,
     }}
   />
 );

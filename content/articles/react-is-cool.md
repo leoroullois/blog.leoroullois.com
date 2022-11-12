@@ -17,7 +17,7 @@ La réponse est 42.
 
 ## 1.1. Voici un composant React
 
-<Counter />
+<Info>Hello</Info>
 
 ## 1.2. Je peux faire du HTML ?
 
