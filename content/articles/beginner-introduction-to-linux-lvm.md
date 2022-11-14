@@ -42,8 +42,8 @@ That's why we could use LVM with RAID.
 | Name | Full name       | Description                                                                                                           |
 | ---- | --------------- | --------------------------------------------------------------------------------------------------------------------- |
 | PV   | Physical volume | Hard disk, partitions, RAID volume
-| VG   | Volume Group    | One or more VG                                                                                                        |
-| LV   | Logical Volumes | LV are cut into VG, then formatted and mounted in a file system. LV are like partitions                               |
+| VG   | Volume Group    | One or more PV                                                                                                        |
+| LV   | Logical Volumes | VG are cut into LV, then formatted and mounted in a file system. LV are like partitions                               |
 | FS   | File system     | This is a way to store information and store them in files. They have a mounted point (like /) and a type (like ext4) |
 
 ### 1.3. Setup
