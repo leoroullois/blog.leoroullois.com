@@ -15,5 +15,5 @@ export const months = [
 
 export const links = [
   {href: '/articles', label: '{ Articles }'},
-  {href: '/writeups', label: ' [ Writeups]'},
+  {href: '/writeups', label: ' [ Writeups ]'},
 ];

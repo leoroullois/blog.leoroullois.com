@@ -22,7 +22,7 @@ author: '@ley0x'
   - [4.1. Creating a LV](#41-creating-a-lv)
   - [4.2. Operations on LV](#42-operations-on-lv)
     - [4.2.1. Create a file system](#421-create-a-file-system)
-      - [4.2.1.1. Resize (extend or reduce) a LV](#4211-resize-extend-or-reduce-a-lv)
+    - [4.2.2. Resize (extend or reduce) a LV](#422-resize-extend-or-reduce-a-lv)
 - [5. Snapshot and restoration](#5-snapshot-and-restoration)
 
 ## 1. Introduction
@@ -146,7 +146,10 @@ Now, I can recreate the PV with the following command :
 
 ## 3. Volume Groups (VG)
 
+Volume Groups are used to create a pool of storage with your **PV**.
+
 ![img][img_vg]
+[Source](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/html/deployment_guide/ch-lvm)
 
 ### 3.1. Creating and listing VGs
 
@@ -314,6 +317,7 @@ sudo vgremove <vg_name>
 ## 4. Logical Volumes (LV)
 
 ![img][img_lv]
+[Source](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/html/deployment_guide/ch-lvm)
 
 Volumes groups are like your hard disks, and your logical volumes are like the partitions on these disks.
 Indeed, you can format a **LV** with a file system of your choice and mount it wherever you want.
@@ -393,7 +397,7 @@ sudo mount -t ext4 /dev/vg1/lv1 /mnt
 
 And use it like for storing file.
 
-##### 4.2.1.1. Resize (extend or reduce) a LV
+#### 4.2.2. Resize (extend or reduce) a LV
 
 You can resize a logical volume with the command ``lvresize``, ``lvextend`` or ``lvreduce``. 
 
