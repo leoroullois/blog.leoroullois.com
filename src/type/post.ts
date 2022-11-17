@@ -8,6 +8,7 @@ export type PostMeta = {
   date: number;
   tags: string[];
   image: string;
+  lang: 'fr' | 'en';
 };
 
 export type PostSlugParams = {

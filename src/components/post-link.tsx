@@ -8,10 +8,14 @@ interface IProps {
   description: string;
   date: number;
   id: string;
+  lang: 'fr' | 'en';
   category: BlogPostCategory;
 }
 
-const PostLink: FC<IProps> = ({title, description, date, id, category}) => {
+const PostLink: FC<IProps> = ({title, description, date, id, category, lang}) => {
+  const fr = "🇫🇷";
+  const en = "🇬🇧";
+
   return (
     <Link href={`/${category}/${id}`}>
       <a
@@ -20,7 +24,7 @@ const PostLink: FC<IProps> = ({title, description, date, id, category}) => {
           'hover:bg-white/10'
         )}
       >
-        <p className='text-xl font-bold'>{title}</p>
+        <p className='text-xl font-bold'>{`${lang === "fr" ? fr : en} - ${title}`}</p>
         <p className='text-sm text-white/80 font-bold'>{date}</p>
         <p className='text-lg'>{description}</p>
       </a>

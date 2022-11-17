@@ -34,7 +34,7 @@ const Home: NextPage<IHomeProps> = ({sortedPosts}) => {
       <main className='w-full'>
         <Wrapper className='flex-col'>
           <h1 className='text-4xl font-bold'>{'</ Last published >'}</h1>
-          {sortedPosts.map(({id, title, description, date, category}) => (
+          {sortedPosts.map(({id, title, description, date, category, lang}) => (
             <PostLink
               key={id}
               title={title}
@@ -42,6 +42,7 @@ const Home: NextPage<IHomeProps> = ({sortedPosts}) => {
               date={date}
               id={id}
               category={category}
+              lang={lang}
             />
           ))}
         </Wrapper>
