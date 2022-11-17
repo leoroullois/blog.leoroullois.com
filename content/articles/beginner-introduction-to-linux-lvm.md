@@ -5,7 +5,7 @@ image: /posts/lvm.jpg
 tags: linux
 date: 14/11/2022
 author: '@ley0x'
-lang: fr
+lang: en
 ---
 
 ## Table of content
